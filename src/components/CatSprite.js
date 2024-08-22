@@ -1,6 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 
-export default function CatSprite({ stream, modifyHistory }) {
+export default function CatSprite({
+  stream,
+  isDragging,
+  onMouseDown,
+  onMouseUp,
+  dragStart,
+}) {
   const [message, setMessage] = useState("");
   const [showMessage, setShowMessage] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState("");
@@ -17,12 +23,6 @@ export default function CatSprite({ stream, modifyHistory }) {
     async function Animations() {
       for (let i = 0; i < stream?.length; i++) {
         const key = stream[i];
-
-        // if (key.value == NaN) {
-        //   console.log(key)
-        // }
-        console.log(key.value === NaN, typeof key.value);
-        modifyHistory((prevArray) => [...prevArray, stream[i]]);
 
         if (key.key.startsWith("movex") || key.key.startsWith("movey")) {
           const increment = key.value;
@@ -101,7 +101,9 @@ export default function CatSprite({ stream, modifyHistory }) {
         }
       }
     }
-
+    if (!isDragging) {
+      Animations();
+    }
     async function Movement(property, startValue, targetValue) {
       return new Promise((resolve) => {
         const animate = () => {
@@ -112,6 +114,8 @@ export default function CatSprite({ stream, modifyHistory }) {
           ) {
             const newValue = currentValue + (startValue < targetValue ? 1 : -1);
             element.style[property] = `${newValue}px`;
+            if (property === "left") ref_left.current = newValue;
+            if (property === "top") ref_top.current = newValue;
             requestAnimationFrame(animate);
           } else {
             resolve();
@@ -122,8 +126,43 @@ export default function CatSprite({ stream, modifyHistory }) {
       });
     }
 
-    Animations();
-  }, [stream]);
+    if (!isDragging) {
+      Animations();
+    }
+  }, [stream, isDragging]);
+
+  const handleMouseDown = (e) => {
+    e.preventDefault();
+    onMouseDown(e, { x: ref_left.current, y: ref_top.current });
+  };
+
+  const handleMouseMove = (e) => {
+    if (isDragging && ref_cat.current) {
+      const dx = e.clientX - dragStart.x;
+      const dy = e.clientY - dragStart.y;
+      ref_left.current += dx;
+      ref_top.current += dy;
+      ref_cat.current.style.left = `${ref_left.current}px`;
+      ref_cat.current.style.top = `${ref_top.current}px`;
+      onMouseDown(e, { x: ref_left.current, y: ref_top.current });
+    }
+  };
+
+  const handleMouseUp = () => {
+    const resetPosition = onMouseUp({
+      x: ref_left.current,
+      y: ref_top.current,
+    });
+    if (resetPosition) {
+      ref_left.current = resetPosition.x;
+      ref_top.current = resetPosition.y;
+      if (ref_cat.current) {
+        ref_cat.current.style.left = `${resetPosition.x}px`;
+        ref_cat.current.style.top = `${resetPosition.y}px`;
+      }
+    }
+  };
+
   return (
     <div style={{ position: "relative" }}>
       <div
@@ -132,8 +171,12 @@ export default function CatSprite({ stream, modifyHistory }) {
           left: `${ref_left.current}px`,
           top: `${ref_top.current}px`,
           backgroundColor: backgroundColor,
+          cursor: isDragging ? "grabbing" : "grab",
         }}
         ref={ref_cat}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
