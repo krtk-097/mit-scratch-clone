@@ -101,9 +101,6 @@ export default function CatSprite({
         }
       }
     }
-    if (!isDragging) {
-      Animations();
-    }
     async function Movement(property, startValue, targetValue) {
       return new Promise((resolve) => {
         const animate = () => {
