@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
-import { componentSelection } from "./componentSelection";
+import { CommandSelections } from "./CommandSelections.js";
 
 export default function Sidebar() {
   const MotionList = [
@@ -68,7 +68,7 @@ export default function Sidebar() {
                           {...value.dragHandleProps}
                           className="my-4 ml-4"
                         >
-                          {componentSelection(item)}
+                          {CommandSelections(item)}
                         </li>
                       )}
                     </Draggable>
@@ -99,7 +99,7 @@ export default function Sidebar() {
                           {...value.dragHandleProps}
                           className="my-4 ml-4"
                         >
-                          {componentSelection(item)}
+                          {CommandSelections(item)}
                         </li>
                       )}
                     </Draggable>
@@ -130,7 +130,7 @@ export default function Sidebar() {
                           {...value.dragHandleProps}
                           className="my-4 ml-4"
                         >
-                          {componentSelection(item)}
+                          {CommandSelections(item)}
                         </li>
                       )}
                     </Draggable>

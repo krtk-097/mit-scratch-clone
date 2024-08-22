@@ -2,7 +2,7 @@ import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
-import { componentSelection } from "./componentSelection";
+import { CommandSelections } from "./CommandSelections";
 
 export default function MidArea({ blocks, setBlocks, setStreams }) {
   const addblock = () => {
@@ -172,7 +172,7 @@ export default function MidArea({ blocks, setBlocks, setStreams }) {
                         {...provided.dragHandleProps}
                         style={{ flex: 1 }}
                       >
-                        {componentSelection(item.split("-")[0], item)}
+                        {CommandSelections(item.split("-")[0], item)}
                       </div>
                       <span
                         className="text-green-600 cursor-pointer flex items-center mr-2"
