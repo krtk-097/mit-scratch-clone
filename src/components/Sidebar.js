@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
-import { CommandSelections } from "./CommandSelections.js";
+import CommandSelections from "./CommandSelections.js";
 
 export default function Sidebar() {
   const MotionList = [

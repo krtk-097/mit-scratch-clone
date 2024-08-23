@@ -17,7 +17,8 @@ import SizeDeterminer from "./Commands/SizeDeterminer";
 import StartFlag from "./Commands/StartFlag";
 import Talk from "./Commands/Talk";
 
-export const CommandSelections = (key, id) => {
+const CommandSelections = (key, id) => {
+  // eslint-disable-next-line default-case
   switch (key.toUpperCase()) {
     case "SHIFTX":
       return <ShiftByX value={id} />;
@@ -55,3 +56,5 @@ export const CommandSelections = (key, id) => {
       return <NavigateToY value={id} />;
   }
 };
+
+export default CommandSelections;

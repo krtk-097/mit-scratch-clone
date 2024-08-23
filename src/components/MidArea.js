@@ -1,8 +1,9 @@
+/* eslint-disable no-const-assign */
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
-import { CommandSelections } from "./CommandSelections";
+import CommandSelections from "./CommandSelections.js";
 
 export default function MidArea({ blocks, setBlocks, setStreams }) {
   const addblock = () => {
