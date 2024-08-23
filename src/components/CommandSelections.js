@@ -9,7 +9,7 @@ import NavigateToX from "./Commands/NavigateToX";
 import NavigateToY from "./Commands/NavigateToY";
 import Pause from "./Commands/Pause";
 import RotateAngle from "./Commands/RotateAngle";
-import RotateAnticlockwise from "./Commands/RotateAnticlockwise";
+import RotateAntiClockwise from "./Commands/RotateAntiClockwise";
 import RotateClockwise from "./Commands/RotateClockwise";
 import ShiftByX from "./Commands/ShiftByX";
 import ShiftByY from "./Commands/ShiftByY";
@@ -32,7 +32,7 @@ export const CommandSelections = (key, id) => {
     case "TURN_CLOCKWISE":
       return <RotateClockwise value={id} />;
     case "TURN_COUNTERCLOCKWISE":
-      return <RotateAnticlockwise value={id} />;
+      return <RotateAntiClockwise value={id} />;
     case "TALK":
       return <Talk value={id} />;
     case "MODIFY_SIZE":
