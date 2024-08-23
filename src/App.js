@@ -68,8 +68,8 @@ export default function App() {
           <div className="w-full md:w-1/2 h-1/2 md:h-full">
             <PreviewArea stream={stream} modifyHistory={setHistory} />
           </div>
-          <div className="w-full md:w-1/2 h-1/2 md:h-full bg-white border-t md:border-t-0 border-l border-gray-200 rounded-tl-xl rounded-bl-xl md:rounded-tr-xl md:rounded-br-xl md:ml-2 md:mt-0">
-            <div>
+          <div className="w-full md:w-1/2 h-1/2 md:h-full bg-white border-t md:border-t-0 border-l border-gray-200 rounded-tl-xl rounded-bl-xl md:rounded-tr-xl md:rounded-br-xl md:ml-2 md:mt-0 flex flex-col">
+            <div className="flex-grow overflow-y-auto">
               <div className="inline-block bg-blue-400 rounded-full px-3 py-1 text-sm font-bold text-white-700 ml-2 my-2">
                 {"History"}
               </div>
