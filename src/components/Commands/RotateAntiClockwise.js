@@ -2,7 +2,7 @@ import { faRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 
-const RotateAntiCounterclockwise = (value) => {
+const RotateAntiClockwise = (value) => {
   const [steps, setSteps] = useState(0);
 
   const handleInputChange = (e) => {
@@ -42,4 +42,4 @@ const RotateAntiCounterclockwise = (value) => {
   );
 };
 
-export default RotateAntiCounterclockwise;
+export default RotateAntiClockwise;
