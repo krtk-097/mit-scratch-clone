@@ -32,7 +32,11 @@ export default function App() {
       actions: [],
     },
   ]);
-
+  const clearHistory = () => {
+    if (window.confirm("Are you sure you want to clear the history?")) {
+      setHistory([]);
+    }
+  };
   const dragEvent = (actionEvent) => {
     if (!actionEvent.destination) return;
 
@@ -70,8 +74,16 @@ export default function App() {
           </div>
           <div className="w-full md:w-1/2 h-1/2 md:h-full bg-white border-t md:border-t-0 border-l border-gray-200 rounded-tl-xl rounded-bl-xl md:rounded-tr-xl md:rounded-br-xl md:ml-2 md:mt-0 flex flex-col">
             <div className="flex-grow overflow-y-auto">
-              <div className="inline-block bg-blue-400 rounded-full px-3 py-1 text-sm font-bold text-white-700 ml-2 my-2">
-                {"History"}
+              <div className="flex justify-between items-center">
+                <div className="inline-block bg-blue-400 rounded-full px-3 py-1 text-sm font-bold text-white-700 ml-2 my-2">
+                  {"History"}
+                </div>
+                <button
+                  onClick={clearHistory}
+                  className="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded mr-2"
+                >
+                  Clear History
+                </button>
               </div>
               <span id="block-100">
                 {history.map((home, index) => (

@@ -20,6 +20,9 @@ export default function Sidebar() {
     "MODIFY_COLOR",
     "MODIFY_BG_COLOR",
     "DEFINE_SIZE",
+    "SAY_FOR_SECONDS",
+    "THINK_FOR_SECONDS",
+    "THINK",
   ];
   const ControlList = ["PAUSE", "LOOP", "START_FLAG"];
 

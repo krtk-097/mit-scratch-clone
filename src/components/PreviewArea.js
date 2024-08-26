@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import CatSprite from "./CatSprite";
 
 export default function PreviewArea({ stream, modifyHistory }) {
@@ -32,13 +32,6 @@ export default function PreviewArea({ stream, modifyHistory }) {
     [originalPosition]
   );
 
-  useEffect(() => {
-    if (stream.length > 0) {
-      const lastCommand = stream[stream.length - 1];
-      modifyHistory((prevHistory) => [...prevHistory, lastCommand]);
-    }
-  }, [stream, modifyHistory]);
-
   return (
     <div className="flex-1 h-full overflow-auto relative" ref={previewAreaRef}>
       <div className="inline-block bg-blue-400 rounded-full px-3 py-1 text-sm font-bold text-white-700 ml-2 my-2">
@@ -53,6 +46,7 @@ export default function PreviewArea({ stream, modifyHistory }) {
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
             dragStart={dragStart}
+            modifyHistory={modifyHistory}
           />
         </div>
       </div>

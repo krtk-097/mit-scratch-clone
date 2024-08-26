@@ -6,6 +6,7 @@ export default function CatSprite({
   onMouseDown,
   onMouseUp,
   dragStart,
+  modifyHistory,
 }) {
   const [message, setMessage] = useState("");
   const [showMessage, setShowMessage] = useState(false);
@@ -23,7 +24,7 @@ export default function CatSprite({
     async function Animations() {
       for (let i = 0; i < stream?.length; i++) {
         const key = stream[i];
-
+        modifyHistory((prevArray) => [...prevArray, stream[i]]);
         if (key.key.startsWith("movex") || key.key.startsWith("movey")) {
           const increment = key.value;
           const isMoveX = key.key.startsWith("movex");
@@ -86,7 +87,23 @@ export default function CatSprite({
           setMessage(message);
           setShowMessage(true);
 
-          await new Promise((resolve) => setTimeout(resolve, 5000));
+          await new Promise((resolve) => setTimeout(resolve, 4000));
+          setShowMessage(false);
+        } else if (key.key.startsWith("think")) {
+          const message = key.value;
+          setMessage(message);
+          setShowMessage(true);
+
+          await new Promise((resolve) => setTimeout(resolve, 7000));
+          setShowMessage(false);
+        } else if (key.key.startsWith("speakduration")) {
+          const { message } = key.value;
+          setMessage(message);
+          setShowMessage(true);
+
+          const durationInMs = 3 * 1000;
+
+          await new Promise((resolve) => setTimeout(resolve, durationInMs));
           setShowMessage(false);
         } else if (key.key.startsWith("changeColorEffect")) {
           const currentColor = element.style.filter || "none";
@@ -126,7 +143,7 @@ export default function CatSprite({
     if (!isDragging) {
       Animations();
     }
-  }, [stream, isDragging]);
+  }, [stream, isDragging, modifyHistory]);
 
   const handleMouseDown = (e) => {
     e.preventDefault();

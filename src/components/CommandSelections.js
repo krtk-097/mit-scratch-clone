@@ -11,11 +11,14 @@ import Pause from "./Commands/Pause";
 import RotateAngle from "./Commands/RotateAngle";
 import RotateAntiClockwise from "./Commands/RotateAntiClockwise";
 import RotateClockwise from "./Commands/RotateClockwise";
+import SayForSeconds from "./Commands/SayForSeconds";
 import ShiftByX from "./Commands/ShiftByX";
 import ShiftByY from "./Commands/ShiftByY";
 import SizeDeterminer from "./Commands/SizeDeterminer";
 import StartFlag from "./Commands/StartFlag";
 import Talk from "./Commands/Talk";
+import Think from "./Commands/Think";
+import ThinkForSeconds from "./Commands/ThinkForSeconds";
 
 const CommandSelections = (key, id) => {
   // eslint-disable-next-line default-case
@@ -54,6 +57,12 @@ const CommandSelections = (key, id) => {
       return <NavigateToX value={id} />;
     case "JUMP_TO_Y":
       return <NavigateToY value={id} />;
+    case "SAY_FOR_SECONDS":
+      return <SayForSeconds value={id} />;
+    case "THINK_FOR_SECONDS":
+      return <ThinkForSeconds value={id} />;
+    case "THINK":
+      return <Think value={id} />;
   }
 };
 
